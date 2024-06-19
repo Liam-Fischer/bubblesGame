@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace bubblesGame
 {
@@ -45,6 +46,9 @@ namespace bubblesGame
         List<int> directionListV = new List<int>();
 
         Random placer = new Random();
+
+        SoundPlayer lose = new SoundPlayer(Properties.Resources.Sad_Trombone_Joe_Lamb_665429450);
+        SoundPlayer takeItem = new SoundPlayer(Properties.Resources.Water_Drop_SoundBible_com_2039669379);
         
         int x = 0;
         int y = 0;
@@ -189,6 +193,7 @@ namespace bubblesGame
             {
                 if (bubble.IntersectsWith(crumbList[i]))
                 {
+                    takeItem.Play();
                     points += 50;
                     crumbList.RemoveAt(i);
                     if (bubbleSize < 36)
@@ -206,6 +211,7 @@ namespace bubblesGame
             {
                 if (bubble.IntersectsWith(greaseList[i]))
                 {
+                    takeItem.Play();
                     points += 70;
                     greaseList.RemoveAt(i);
                     if (bubbleSize < 36)
@@ -223,6 +229,7 @@ namespace bubblesGame
             {
                 if (bubble.IntersectsWith(verticalAntList[i]))
                 {
+                    takeItem.Play();
                     points += 90;
                     verticalAntList.RemoveAt(i);
                     directionListV.RemoveAt(i);
@@ -242,13 +249,14 @@ namespace bubblesGame
             {
                 if (bubble.IntersectsWith(horizontalAntList[i]))
                 {
+                    takeItem.Play();
                     points += 90;
                     horizontalAntList.RemoveAt(i);
                     directionListH.RemoveAt(i);
                     hAntReturn = false;
                     if (bubbleSize < 36)
                     {
-                        bubbleSize += 1;
+                        takeItem.Play();
                     }
                     else if (bubbleSize >= 36)
                     {
@@ -270,6 +278,7 @@ namespace bubblesGame
                     }
                     else if(bubbleSize == 25)
                     {
+                        lose.Play();
                         EndOfGame();
                     }
                 }
@@ -286,11 +295,13 @@ namespace bubblesGame
                     }
                     else if (bubbleSize == 36)
                     {
+                        takeItem.Play();
                         spongeList.RemoveAt(i);
                         points += 110;
                     }
                     else if (bubbleSize == 25)
                     {
+                        lose.Play();
                         EndOfGame();
                     }
                 }
@@ -307,11 +318,13 @@ namespace bubblesGame
                     }
                     else if (bubbleSize == 36)
                     {
+                        takeItem.Play();
                         scrubList.RemoveAt(i);
                         points += 110;
                     }
                     else if (bubbleSize == 25)
                     {
+                        lose.Play();
                         EndOfGame();
                     }
                 }
@@ -319,6 +332,7 @@ namespace bubblesGame
 
             if(bubble.IntersectsWith(drainCenter))
             {
+                lose.Play();
                 EndOfGame();
             }
 

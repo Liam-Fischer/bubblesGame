@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Liam Fischer
+//ISC3U
+//June 20th 2024
+//a more complex game involving cleaning a sink while avoiding other cleaners and razors
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +15,7 @@ using System.Media;
 
 namespace bubblesGame
 {
+   
     public partial class gameSpace : Form
     {
         bool wPressed = false;
@@ -85,6 +90,7 @@ namespace bubblesGame
 
             if (gameTimer.Enabled == false && endGame == false)
             {
+                //displaying the things to grab/avoid
                 m.Graphics.FillEllipse(bubbleBrush, bubble);
                 m.Graphics.FillRectangle(crumbBrush, 180, 260, 14, 14);
                 m.Graphics.FillRectangle(greaseBrush, 180, 325, 12, 12);
@@ -189,6 +195,7 @@ namespace bubblesGame
 
             MoveCharacter();
 
+            //getting points
             for (int i = 0; i < crumbList.Count; i++)
             {
                 if (bubble.IntersectsWith(crumbList[i]))
@@ -483,6 +490,7 @@ namespace bubblesGame
         }
         public void PlaceItems()
         {
+            //this code generates and places all the items
             int c = placer.Next(12, 25);
             for (int i = 0; i < c; i++)
             {
@@ -670,6 +678,7 @@ namespace bubblesGame
         }
         public void ClearStartScreen()
         {
+            //this code transitions from the start screen to the game itself
             titleLabel.Visible = false;
             infoLabel1.Visible = false;
             infoLabel2.Visible = false;
@@ -689,6 +698,7 @@ namespace bubblesGame
         }
         public void EndOfGame()
         {
+            //this code works to end the game
             bubbleSize = 0; 
             endGame = true;
             gameTimer.Enabled = false;
